@@ -26,7 +26,7 @@ const PurchaseFrequencyContainer: FC = () => {
     validateDates(startDate, date)
   }
 
-  const { data } = usePurchaseFrequency(startDate, endDate)
+  const { data, isLoading } = usePurchaseFrequency(startDate, endDate)
 
   return (
     <>
@@ -39,7 +39,7 @@ const PurchaseFrequencyContainer: FC = () => {
       />
       {error && <div className="text-red-500">{error}</div>}
       {/** 차트 노출 영역 */}
-      {data && <FrequencyChart chartList={data} />}
+      {isLoading ? <div>Loading...</div> : <FrequencyChart chartList={data || []} />}
     </>
   )
 }

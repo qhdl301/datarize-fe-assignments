@@ -1,2 +1,2 @@
 export * from './purchase'
-export * from './customerList'
+export * from './customer'

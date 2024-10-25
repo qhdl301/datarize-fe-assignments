@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
-import { toCurrencyFormat } from '../utils'
+import { toCurrencyFormat } from '../../utils'
 
 export type FrequencyData = {
   range: string
@@ -11,7 +11,6 @@ export type FrequencyCustomData = {
   상품가격: FrequencyData['count']
 } & Pick<FrequencyData, 'range'>
 
-// 가격대별 빈도 데이터 노출 API
 const fetchPurchaseFrequency = async (from?: string, to?: string): Promise<Array<FrequencyData>> => {
   const response = await axios.get('http://localhost:4000/api/purchase-frequency', {
     params: { from, to },
@@ -19,7 +18,12 @@ const fetchPurchaseFrequency = async (from?: string, to?: string): Promise<Array
   return response.data
 }
 
-// 차트에 노출 시켜주기 용이하도록 데이터 가공
+/**
+ * 가격대별 구매 빈도 노출 Custom Hook
+ * @param from 시작일
+ * @param to 종료일
+ * @returns 가격대별 구매 빈도 반환 값
+ */
 export const usePurchaseFrequency = (from?: string, to?: string) => {
   return useQuery({
     queryKey: ['purchaseFrequency', from, to],

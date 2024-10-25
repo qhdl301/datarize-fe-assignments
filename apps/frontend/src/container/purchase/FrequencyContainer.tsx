@@ -1,5 +1,5 @@
 import { FC, useState } from 'react'
-import { usePurchaseFrequency } from '../../hooks'
+import { usePurchaseFrequency } from '../../shared/query'
 import { DateSelector, FrequencyChart } from '../../components'
 
 const PurchaseFrequencyContainer: FC = () => {

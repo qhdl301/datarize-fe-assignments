@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import { BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid, Legend } from 'recharts'
-import { FrequencyCustomData } from '../../hooks/usePurchaseFrequency'
+import { FrequencyCustomData } from '../../shared/query/usePurchaseFrequency'
 
 interface PurchaseFrequencyChartProps {
   chartList: Array<FrequencyCustomData>

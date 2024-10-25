@@ -1,4 +1,4 @@
-import CustomerListContainer from '../container/customer'
+import CustomerListContainer from '../container/customerList'
 
 const CustomerListLayer = () => {
   return (

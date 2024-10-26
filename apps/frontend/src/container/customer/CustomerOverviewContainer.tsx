@@ -1,22 +1,18 @@
 import { FC, useState, useMemo } from 'react'
 import { useCustomerPurchases } from '../../shared'
 import { CustomerDetail, CustomerList } from '../../components'
-import { CustomersData } from '../../shared/query'
+import { useCustomers } from '../../shared/query'
 
 interface CustomerOverviewContainerProps {
-  customers: Array<CustomersData>
   sortOrder: 'asc' | 'desc'
   debouncedSearchTerm: string
 }
 
 // 고객 목록, 상세를 노출 시켜주는 Container 입니다.
-const CustomerOverviewContainer: FC<CustomerOverviewContainerProps> = ({
-  customers,
-  sortOrder,
-  debouncedSearchTerm,
-}) => {
+const CustomerOverviewContainer: FC<CustomerOverviewContainerProps> = ({ sortOrder, debouncedSearchTerm }) => {
   const [selectedCustomerId, setSelectedCustomerId] = useState<number | null>(null) // 선택한 고객 ID
 
+  const { data: customers, isLoading: isCustomersLoading } = useCustomers(debouncedSearchTerm)
   const { data: purchases, isLoading: isPurchasesLoading } = useCustomerPurchases(selectedCustomerId!)
 
   const filteredCustomers = useMemo(() => {
@@ -39,14 +35,15 @@ const CustomerOverviewContainer: FC<CustomerOverviewContainerProps> = ({
 
   return (
     <div className="flex justify-between space-x-4">
+      {/** 고객 목록 영역 */}
       <CustomerList
         customers={filteredCustomers}
+        isLoading={isCustomersLoading}
         selectedCustomerId={selectedCustomerId}
         onCustomerClick={handleCustomerClick}
       />
-      {selectedCustomerId && (
-        <>{isPurchasesLoading ? <div>Loading purchases...</div> : <CustomerDetail purchases={purchases || []} />}</>
-      )}
+      {/** 구매 내역 영역 */}
+      <CustomerDetail purchases={purchases || []} isLoading={isPurchasesLoading} />
     </div>
   )
 }

@@ -1,7 +1,7 @@
 import { FC, memo } from 'react'
 import { CustomersData } from '../../shared/query'
 import { toCurrencyFormat } from '../../utils'
-import { Skeleton } from '../../ui'
+import Skeleton from './Skeleton'
 
 interface CustomerListProps {
   selectedCustomerId: number | null

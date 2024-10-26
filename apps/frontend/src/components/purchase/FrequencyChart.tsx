@@ -19,12 +19,18 @@ const PurchaseFrequencyChart: FC<PurchaseFrequencyChartProps> = ({ chartList }) 
         bottom: 5,
       }}
     >
-      <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="range" />
-      <YAxis />
-      <Tooltip />
+      <CartesianGrid stroke="#e0e0e0" strokeDasharray="5 5" />
+      <XAxis dataKey="range" tick={{ fill: '#333' }} />
+      <YAxis tick={{ fill: '#333' }} label={{ value: '갯수', angle: -90, position: 'insideLeft' }} />
+      <Tooltip formatter={(value) => `${value} 개`} labelFormatter={(label) => `가격 범위: ${label}`} />
       <Legend />
-      <Bar dataKey="상품가격" fill="#8884d8" />
+      <defs>
+        <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
+          <stop offset="95%" stopColor="#8884d8" stopOpacity={0.2} />
+        </linearGradient>
+      </defs>
+      <Bar dataKey="상품구매" fill="url(#colorUv)" isAnimationActive={true} animationDuration={1000} />
     </BarChart>
   )
 }

@@ -1,6 +1,6 @@
 import { FC, useState } from 'react'
 import { usePurchaseFrequency } from '../../shared/query'
-import { DateSelector, FrequencyChart } from '../../components'
+import { DateSelector, FrequencyChart, SkeletonChart } from '../../components'
 
 const PurchaseFrequencyContainer: FC = () => {
   const [startDate, setStartDate] = useState('2024-07-01')
@@ -42,7 +42,7 @@ const PurchaseFrequencyContainer: FC = () => {
       {/** 차트 오류 영역 */}
       {isError && <div className="text-red-500">데이터를 불러오는 중 차트 오류가 발생했습니다.</div>}
       {/** 차트 노출 영역 */}
-      {isLoading && !isError ? <div>Loading...</div> : <FrequencyChart chartList={data || []} />}
+      {isLoading ? <SkeletonChart /> : <FrequencyChart chartList={data || []} />}
     </>
   )
 }

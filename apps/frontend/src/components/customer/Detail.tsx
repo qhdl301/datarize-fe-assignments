@@ -1,7 +1,7 @@
 import { FC, memo } from 'react'
 import { PurchaseData } from '../../shared'
 import { toCurrencyFormat } from '../../utils'
-import { Skeleton } from '../../ui'
+import Skeleton from './Skeleton'
 
 interface CustomerDetailProps {
   purchases: Array<PurchaseData>

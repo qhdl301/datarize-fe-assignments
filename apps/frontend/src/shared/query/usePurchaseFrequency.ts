@@ -8,7 +8,7 @@ export type FrequencyData = {
 }
 
 export type FrequencyCustomData = {
-  상품가격: FrequencyData['count']
+  상품구매: FrequencyData['count']
 } & Pick<FrequencyData, 'range'>
 
 const fetchPurchaseFrequency = async (from?: string, to?: string): Promise<Array<FrequencyData>> => {
@@ -33,7 +33,7 @@ export const usePurchaseFrequency = (from?: string, to?: string) => {
         const rangeStrList = purchase.range.split('-')
 
         return {
-          상품가격: purchase.count,
+          상품구매: purchase.count,
           range: `${toCurrencyFormat(Number(rangeStrList[0]))}원-${toCurrencyFormat(Number(rangeStrList[1]))}원`,
         }
       }),
